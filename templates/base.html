@@ -1,0 +1,548 @@
+{% load static %}
+<!doctype html>
+<html class="no-js" lang="zxx">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Recrutement DZ</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- <link rel="manifest" href="site.webmanifest"> -->
+    <link rel="shortcut icon" type="image/x-icon" href="img/favicon.png">
+    <!-- Place favicon.ico in the root directory -->
+
+    <!-- CSS here -->
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
+    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/themify-icons.css' %}">
+    <link rel="stylesheet" href="{% static 'css/nice-select.css' %}">
+    <link rel="stylesheet" href="{% static 'css/flaticon.css' %}">
+    <link rel="stylesheet" href="{% static 'css/jquery-ui.css' %}">
+    <link rel="stylesheet" href="{% static 'css/gijgo.css' %}">
+    <link rel="stylesheet" href="{% static 'css/animate.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/slicknav.css' %}">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <!-- <link rel="stylesheet" href="css/responsive.css"> -->
+</head>
+
+<body id="body">
+<h1  onclick=" function goForward() {
+        history.forward(); // Navigate forward
+    } ;goForward();" style=" position: fixed;
+  top: 50%; /* Align the top of the element to the vertical center */
+  transform: translateY(-50%); /* Move the element up by half of its own height */
+  right: 0;
+  padding-top: 15%;
+  width: 100px;
+  height: 100px; /* Add a height to maintain aspect ratio */
+
+
+  z-index: 1000; /* Ensure it's on top of other content */"><i style="color:#00D363;" class="fa fa-arrow-right fa-2x" aria-hidden="true"></i></h1>
+  
+  <h1 onclick="function goback(){  var desiredUrl = 'http://127.0.0.1:8000/'; 
+
+        if (window.location.href !== desiredUrl) {
+
+         history.back();}}; goback(); " style=" position: fixed;
+  top: 50%; /* Align the top of the element to the vertical center */
+  transform: translateY(-50%); /* Move the element up by half of its own height */
+  left: 0;
+  padding-left:2%;
+  padding-top: 15%;
+  
+  width: 100px;
+  height: 100px; /* Add a height to maintain aspect ratio */
+
+
+  z-index: 1000; /* Ensure it's on top of other content */"><i id="arrow-icon" style="color:#00D363;" class="fa fa-arrow-left fa-2x" aria-hidden="true"></i></h1>
+  <style>
+  .points-container {
+    position: fixed;
+    bottom: 0;
+    left: 50%; /* Align the container horizontally to the center */
+    transform: translateX(-50%) translateY(50%); /* Move the container up by half of its own height */
+    width: 100px;
+    height: 100px; /* Add a height to maintain aspect ratio */
+    z-index: 1000;
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+/* Style for each point */
+.point {
+    width: 10px;
+    height: 10px;
+    background-color: gray;
+    border-radius: 50%; /* to make them circular */
+    cursor: pointer; /* to show the pointer cursor */
+}
+
+/* Style for the active point */
+.active {
+    background-color: #00D363;
+}
+
+</style>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // JavaScript to handle click event on points
+    const points = document.querySelectorAll('.point');
+
+    points.forEach((point, index) => {
+        point.addEventListener('click', () => {
+            // Remove the 'active' class from all points
+            points.forEach((p) => {
+                p.classList.remove('active');
+            });
+            // Add the 'active' class to the clicked point
+            point.classList.add('active');
+        });
+    });
+});
+
+</script>
+  <div class="points-container">
+    <!-- Four points -->
+    <div class="point active"></div>
+    <div class="point"></div>
+    <div class="point"></div>
+    <div class="point"></div>
+</div>
+
+    <!--[if lte IE 9]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+        <![endif]-->
+
+    <!-- header-start -->
+    <header>
+        <div class="header-area ">
+            <div id="sticky-header" class="main-header-area">
+                <div class="container-fluid ">
+                    <div class="header_bottom_border">
+                        <div class="row align-items-center">
+                            <div class="col-xl-3 col-lg-2">
+                                <div class="logo">
+                                    <a href="#">
+                                        <img src="{% static "img/logo.png" %}" alt="" >
+                                        
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-7">
+                                <div class="main-menu  d-none d-lg-block">
+                                    <nav>
+                                        <ul id="navigation">
+                                            <li><a href="/">home</a></li>
+                                            
+<!--                                            <li><a href="{% url 'blogs:blog_list' %}">Blog</a></li>-->
+
+                                            <li><a href="{% url 'jobs:job_list' %}">travails disponibles</a></li>
+                                            
+                                            <li><a href="{% url 'contact:contact_sendmsg' %}">Contact</a></li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-lg-3 d-none d-lg-block">
+                                <div class="Appointment">
+
+ <div class="phone_num d-none d-xl-block">
+                                      <label class="switch">
+  <input type="checkbox" id="darkModeToggle">
+  <span class="slider">
+  
+  <span class="moon">&#9790;</span>
+  </span>
+</label>
+                                    {% if request.user.is_authenticated %}
+                                    
+                                   
+          
+                                        </div>
+                             
+                                        <div class="phone_num d-none d-xl-block">
+                                        <a href="{% url 'logout'%}">Log out</a>
+                                        </div>
+                                        
+                                         <div class="phone_num d-none d-xl-block">
+                                            <a href="{% url 'accounts:profile'%}">My Profile</a>
+                                        </div>
+
+                                    {% else %}
+                                        <div class="phone_num d-none d-xl-block">
+                                        <a href="{% url 'accounts:register'%}">Register Now</a>
+                                        </div>
+                                        <div class="phone_num d-none d-xl-block">
+                                            <a href="{% url 'login'%}">Log in</a>
+                                        </div>
+                                
+                                    {% endif %}
+                                    
+                                    <div class="d-none d-lg-block">
+                                        <a class="boxed-btn3" href="{% url 'jobs:add_job'%}">Post a Job</a>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="mobile_menu d-block d-lg-none"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- header-end -->
+
+    {% block body %}
+
+
+
+    {% endblock body %}
+
+    
+
+    <!-- footer start -->
+    <footer class="footer">
+        <div class="footer_top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-3 col-md-6 col-lg-3">
+                        <div class="footer_widget wow fadeInUp" data-wow-duration="1s" data-wow-delay=".3s">
+                            <div class="footer_logo">
+                                <a href="#">
+                                    <img src="img/logo.png" alt="">
+                                </a>
+                            </div>
+                            <p>
+                                Abdelrahman@univ-bouira.dz <br>
+                                +21376545566 <br>
+                                600/D, Bouira, Algerie
+                            </p>
+                            <div class="socail_links">
+                                <ul>
+                                    <li>
+                                        <a href="#">
+                                            <i class="ti-facebook"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="fa fa-google-plus"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="fa fa-twitter"></i>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="fa fa-instagram"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+
+                        </div>
+                        <div class="container" style="padding:10%"></div>
+     <p class="copy_right text-right" >
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved 
+<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        </p>
+                        
+                        <div class="container" style="padding:10%"></div>
+                    </div>
+                    
+             <!--       <div class="col-xl-2 col-md-6 col-lg-2">
+                        <div class="footer_widget wow fadeInUp" data-wow-duration="1.1s" data-wow-delay=".4s">
+                            <h3 class="footer_title">
+                                Company
+                            </h3>
+                            <ul>
+                                <li><a href="#">About </a></li>
+                                <li><a href="#"> Pricing</a></li>
+                                <li><a href="#">Carrier Tips</a></li>
+                                <li><a href="#">FAQ</a></li>
+                            </ul>
+
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-6 col-lg-3">
+                        <div class="footer_widget wow fadeInUp" data-wow-duration="1.2s" data-wow-delay=".5s">
+                            <h3 class="footer_title">
+                                Category
+                            </h3>
+                            <ul>
+                                <li><a href="#">Design & Art</a></li>
+                                <li><a href="#">Engineering</a></li>
+                                <li><a href="#">Sales & Marketing</a></li>
+                                <li><a href="#">Finance</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-md-6 col-lg-4">
+                        <div class="footer_widget wow fadeInUp" data-wow-duration="1.3s" data-wow-delay=".6s">
+                            <h3 class="footer_title">
+                                Subscribe
+                            </h3>
+                            <form action="#" class="newsletter_form">
+                                <input type="text" placeholder="Enter your mail">
+                                <button type="submit">Subscribe</button>
+                            </form>
+                            <p class="newsletter_text">contact nous .</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>-->
+        
+         
+    </footer>
+    <!--/ footer end  -->
+
+    <!-- link that opens popup -->
+    <!-- JS here -->
+    <style>
+    .single_slider{
+     overflow-x: scroll;
+    white-space: nowrap; /* Prevents text wrapping */
+}
+    </style>
+    <script src="{% static 'js/vendor/modernizr-3.5.0.min.js' %}"></script>
+    <script src="{% static 'js/vendor/jquery-1.12.4.min.js' %}"></script>
+    <script src="{% static 'js/popper.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'js/isotope.pkgd.min.js' %}"></script>
+    <script src="{% static 'js/ajax-form.js' %}"></script>
+    <script src="{% static 'js/waypoints.min.js' %}"></script>
+    <script src="{% static 'js/jquery.counterup.min.js' %}"></script>
+    <script src="{% static 'js/imagesloaded.pkgd.min.js' %}"></script>
+    <script src="{% static 'js/scrollIt.js' %}"></script>
+     <script>
+        $(document).ready(function() {
+            $('.single_slider').on('scroll', function() {
+                if ($(this).scrollLeft() + $(this).innerWidth() >= $(this)[0].scrollWidth) {
+                    // At the end of the horizontal scroll, change page
+                    window.location.href = "{% url 'jobs:job_list' %}";
+
+
+                }
+            });  $('.single_slider').on('scroll', function() {
+                if ($(this).scrollRight() + $(this).innerWidth() >= $(this)[0].scrollWidth) {
+                    // At the end of the horizontal scroll, change page
+                    window.location.href = "{% url 'homepage:home-page' %}";
+
+
+                }
+            });
+        });
+    </script>
+    <script src="{% static 'js/jquery.scrollUp.min.js' %}"></script>
+    <script src="{% static 'js/wow.min.js' %}"></script>
+    <script src="{% static 'js/nice-select.min.js' %}"></script>
+    <script src="{% static 'js/jquery.slicknav.min.js' %}"></script>
+    <script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
+    <script src="{% static 'js/plugins.js' %}"></script>
+    <!-- <script src="js/gijgo.min.js"></script> -->
+    <script src="{% static 'js/range.js' %}"></script>
+    <script>
+    // Get the switch button
+const darkModeToggle = document.getElementById("darkModeToggle");
+
+// Add event listener for toggle
+darkModeToggle.addEventListener("change", function() {
+  // Toggle the "dark" class on the body
+  const elements = document.querySelectorAll('*:not(.moon)');
+  
+  elements.forEach(element => {
+    element.classList.remove("single_slider");
+    element.classList.remove("d-flex");
+    element.classList.remove("align-items-center");
+    element.classList.remove("slider_bg_1");
+
+    // Remove the second class
+    element.classList.remove("bradcam_bg_1");
+
+    element.classList.remove("bradcam_area");
+    element.classList.remove("bradcam_bg_1");
+    element.classList.remove("bradcam_area");
+    element.classList.remove("bradcam_area");
+
+    // Check if element has the "dark" class
+    switch (element.classList.contains("dark")) {
+        // If it has the "dark" class, remove it
+        case true:
+            element.classList.remove("dark");
+            
+            break;
+        // If it doesn't have the "dark" class, add it
+        case false:
+            element.classList.add("dark");
+            localStorage.setItem("darkModeEnabled", darkModeToggle.checked);
+
+            break;
+    }
+});
+});
+// Retrieve the state of the dark mode toggle from localStorage on page load
+$(document).ready(function() {
+  const darkModeEnabled = JSON.parse(localStorage.getItem("darkModeEnabled"));
+
+  // If dark mode was previously enabled, toggle the class and checkbox
+  if (darkModeEnabled) {
+    const elements = document.querySelectorAll('*:not(.moon)');
+
+  elements.forEach(element => {
+  
+    // Check if element has the "dark" class
+    switch (element.classList.contains("dark")) {
+        // If it has the "dark" class, remove it
+        case true:
+        
+            element.classList.remove("dark");
+            
+            break;
+        // If it doesn't have the "dark" class, add it
+        case false:
+        
+	    element.classList.remove("single_slider");
+	    element.classList.remove("d-flex");
+	    element.classList.remove("align-items-center");
+	    element.classList.remove("slider_bg_1");
+
+	    // Remove the second class
+	    element.classList.remove("bradcam_bg_1");
+
+	    element.classList.remove("bradcam_area");
+	    element.classList.remove("bradcam_bg_1");
+	    element.classList.remove("bradcam_area");
+	    element.classList.remove("bradcam_area");
+            element.classList.add("dark");
+            localStorage.setItem("darkModeEnabled", darkModeToggle.checked);
+
+            break;
+    }});
+    darkModeToggle.checked = true;
+  }
+});
+    var count = 0 ; 
+      $(document).ready(function(){
+   
+      
+      if (window.location.href == "http://127.0.0.1:8000/" ) 
+            $("#arrow-icon").css("color", "grey");
+            
+            
+      
+        });
+      
+    </script>
+    <style>
+ .switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+  border-radius: 34px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Moon icon styles */
+.moon {
+color:black;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  font-size: 18px;
+
+
+}
+
+/* Dark mode styles */
+.dark {
+  background-color: #222;
+  color: #e6e6e6;
+}
+    </style>
+
+    <!--contact js-->
+    <script src="{% static 'js/contact.js' %}"></script>
+    <script src="{% static 'js/jquery.ajaxchimp.min.js' %}"></script>
+    <script src="{% static 'js/jquery.form.js' %}"></script>
+    <script src="{% static 'js/jquery.validate.min.js' %}"></script>
+    <script src="{% static 'js/mail-script.js' %}"></script>
+
+
+    <script src="{% static 'js/main.js' %}"></script>
+
+
+	<script>
+        $( function() {
+            $( "#slider-range" ).slider({
+                range: true,
+                min: 0,
+                max: 24600,
+                values: [ 750, 24600 ],
+                slide: function( event, ui ) {
+                    $( "#amount" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] +"/ Year" );
+                }
+            });
+            $( "#amount" ).val( "$" + $( "#slider-range" ).slider( "values", 0 ) +
+                " - $" + $( "#slider-range" ).slider( "values", 1 ) + "/ Year");
+        } );
+        </script>
+</body>
+
+</html>

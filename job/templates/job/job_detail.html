@@ -1,0 +1,233 @@
+ {% extends 'base.html' %}
+
+{% block body %}
+    <!-- bradcam_area  -->
+    <div class="bradcam_area bradcam_bg_1">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-12">
+                    <div class="bradcam_text">
+                        <h3>{{job.title}}</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--/ bradcam_area  -->
+
+    <div class="job_details_area" style="direction:rtl" id="myElement">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="job_details_header">
+                        <div class="single_jobs white-bg d-flex justify-content-between">
+                            <div class="jobs_left d-flex align-items-center">
+                                <div class="thumb">
+                                    <img id='imgsz'src="{{job.image.url}}" alt="">
+                                </div>
+                                <div class="jobs_conetent">
+                                    <a href="#"><h4>{{job.title}}</h4></a>
+                                    <div class="links_locat d-flex align-items-center">
+                                        <div class="location">
+                                            <p> <i class="fa fa-map-marker"></i> {{job.location}}</p>
+                                        </div>
+                                        <div class="location">
+                                            <p> <i class="fa fa-clock-o"></i> {{job.job_type}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="jobs_right">
+                                <div class="apply_now">
+                                    <a class="heart_mark" href="#"> <i class="ti-heart"></i> </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="descript_wrap white-bg">
+                        <div class="single_wrap">
+                            <h4>Travail description</h4>
+                            <p>{{job.description}}</p>
+                        </div>
+
+                    
+                
+                    </div>
+                        
+                    
+                    <div class="apply_job_form white-bg">
+                        <h4>Postuler maintenant</h4>
+                        <form method='POST' enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="input_field">
+                                        <!--<input type="text" placeholder="Your name"> -->
+                                        {{jobform.name}}
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="input_field">
+                                       <!-- <input type="text" placeholder="Email">-->
+                                       {{jobform.email}}
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="input_field">
+                                        <!--<input type="text" placeholder="Website/Portfolio link">-->
+                                        {{jobform.website}}
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                          <button type="button"  id="inputGroupFileAddon03" ><i class="fa fa-cloud-upload" aria-hidden="true" ></i>
+                                          <i>Upload CV</i>
+                                          </button>
+                                        </div>
+                                        <div class="custom-file">
+                                          <!--<input type="file" class="custom-file-input" id="inputGroupFile03" aria-describedby="inputGroupFileAddon03">-->
+                                          {{jobform.cv}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="input_field">
+                                        <!--<textarea name="#" id="" cols="30" rows="10" placeholder="Coverletter"></textarea>-->
+                                        {{jobform.cover_letter}}
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="submit_btn">
+                                        <button class="boxed-btn3 w-100" type="submit">Apply Now</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="job_sumary">
+                        <div class="summery_header">
+                            <h3>Job Summery</h3>
+                        </div>
+                        <div class="job_content">
+                            <ul>
+                                <li>Published on: <span>{{job.published_at|date:'d M o'}}</span></li>
+                                <li>Vacancy: <span>{{job.vacancy}} Position</span></li>
+                                <li>Salary: <span>{{job.salary}}k/y</span></li>
+                                <li>Location: <span>{{job.location}}</span></li>
+                                <li>Job Nature: <span> {{job.job_type}}</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="share_wrap d-flex">
+                        <span>Share at:</span>
+                        <ul>
+                            <li><a href="#"> <i class="fa fa-facebook"></i></a> </li>
+                            <li><a href="#"> <i class="fa fa-google-plus"></i></a> </li>
+                            <li><a href="#"> <i class="fa fa-twitter"></i></a> </li>
+                            <li><a href="#"> <i class="fa fa-envelope"></i></a> </li>
+                        </ul>
+                    </div>
+                    <div class="job_location_wrap">
+                        <div class="job_lok_inner">
+                            <div id="map" style="height: 200px;"></div>
+                            <script>
+                              function initMap() {
+                                const address = "{{job.location}}";
+
+                                
+                                fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(address)}&key=AIzaSyB2ERFg3-a_15-fCGZVRuKOVaA0-ve2_ZE&callback`)
+                                .then(response => response.json())
+                                .then(data => {
+                                    
+                                    const location = data.results[0].geometry.location;
+                                    const latitude = location.lat;
+                                    const longitude = location.lng;
+                                var uluru = {lat: latitude, lng: longitude};
+                                var grayStyles = [
+                                  {
+                                    featureType: "all",
+                                    stylers: [
+                                      { saturation: -90 },
+                                      { lightness: 50 }
+                                    ]
+                                  },
+                                  {elementType: 'labels.text.fill', stylers: [{color: '#ccdee9'}]}
+                                ];
+                                
+                                var map = new google.maps.Map(document.getElementById('map'), {
+                                  center: {lat: latitude, lng: longitude},
+                                  zoom: 10,
+                        
+  mapTypeId: google.maps.MapTypeId.HYBRID
+  ,
+                                   styles: [
+          { 
+            featureType: "all",
+            elementType: "labels",
+            stylers: [{ visibility: "on" }]
+          }
+        ],
+                                   
+                                  scrollwheel:  true
+                                });
+                                const customMarker = {
+        url: "https://firebasestorage.googleapis.com/v0/b/auth-72203.appspot.com/o/markers%2Ftravail%20(3).png?alt=media&token=ed51a9ed-fb90-4650-9369-0a20178331fb", 
+        scaledSize: new google.maps.Size(48, 48),
+      };
+                                const marker = new google.maps.Marker({
+        position: {lat: latitude, lng: longitude},
+        icon: customMarker, 
+
+        map: map,
+        title: "{{job.location}}",
+      });
+      marker.set('labelContent', '{{job.location}}');
+                                console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
+                            })
+                            .catch(error => {
+                                console.error('Error fetching data:', error);
+                            });
+                              }
+                              
+                            </script>
+                            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB2ERFg3-a_15-fCGZVRuKOVaA0-ve2_ZE&callback=initMap"></script>
+                            
+                          </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script>
+         $(document).ready(function() {
+      // Get the variable value
+      var myVar = 1;
+
+      // Get the element
+      var $element = $("#myElement");
+
+      // Check the variable value and apply conditional styling
+      if (myVar === 12) {
+        // Add the red class to apply red background color
+        $element.addClass("red");
+      }
+    });
+    </script>
+    <style>
+            
+            
+
+    /* Styling for the red color */
+    .job_details_area.red {
+      background-color: black;
+      color: white;
+    }
+
+    </style>
+
+    {% endblock body %}
